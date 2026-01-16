@@ -24,10 +24,10 @@ interface EditModalProps {
 
 const ALL_ROLES: Role[] = [
     Role.USER,
-    Role.TENANT,
+    Role.DEVELOPER,
     Role.LANDLORD,
     Role.ADMIN,
-    Role.CARETAKER,
+    Role.MODERTOR,
 ]
 
 export function EditModal({ user, onClose, onSave }: EditModalProps) {

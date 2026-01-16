@@ -1,9 +1,8 @@
 // lib/roles.ts
 export enum Role {
     ADMIN = "ADMIN",
-    LANDLORD = "LANDLORD",
-    CARETAKER = "CARETAKER",
-    TENANT = "TENANT",
+    MODERTOR = "MODERTOR",
+    DEVELOPER = "DEVELOPER",
     USER = "USER",
 }
 

@@ -97,64 +97,31 @@ export const NAVIGATION: NavItem[] = [
         ],
     },
 
-    // 🏢 Landlord
-    {
-        name: "Dashboard",
-        href: "/",
-        icon: LayoutGrid,
-        roles: [Role.LANDLORD],
-        subItems: [
-            {
-                name: "Create Plot",
-                href: "/dashboard/new",
-                icon: LayoutGrid,
-                roles: [Role.LANDLORD],
-            },
-            {
-                name: "Add/Remove Tenant",
-                href: "/dashboard/add-remove",
-                icon: House,
-                roles: [Role.CARETAKER, Role.LANDLORD, Role.ADMIN],
-            },
-        ],
-    },
-
-
-
-
-    // 🧰 Caretaker
-    {
-        name: "Maintenance",
-        href: "/caretaker/maintenance",
-        icon: Wrench,
-        roles: [Role.CARETAKER],
-    },
-
     // 👤 Tenant
     {
         name: "My House",
         href: "/my-house",
         icon: Building2,
-        roles: [Role.TENANT],
+        roles: [Role.DEVELOPER],
     },
     // 🔐 Apartment Based
     {
         name: "Houses",
         href: "/houses",
         icon: House,
-        roles: [Role.CARETAKER, Role.LANDLORD, Role.ADMIN],
+        roles: [Role.MODERTOR,  Role.ADMIN],
     },
     {
         name: "Tenants",
         href: "/tenants",
         icon: UsersIcon,
-        roles: [Role.CARETAKER, Role.LANDLORD, Role.ADMIN],
+        roles: [Role.MODERTOR, Role.ADMIN],
     },
     {
         name: "Payments",
         href: "/payments",
         icon: CoinsIcon,
-        roles: [Role.CARETAKER, Role.LANDLORD, Role.ADMIN],
+        roles: [Role.MODERTOR, Role.ADMIN],
     },
     // 🔐 Authenticated
     {
@@ -214,10 +181,9 @@ export function getDefaultRoute(session: Session | null): string {
 
     // Priority order: ADMIN → LANDLORD → CARETAKER → TENANT → default
     if (userRoles.includes(Role.ADMIN)) return "/admin"
-    if (userRoles.includes(Role.LANDLORD)) return "/tenants"
-    if (userRoles.includes(Role.CARETAKER)) return "/caretaker/maintenance"
-    if (userRoles.includes(Role.TENANT)) return "/my-house"
-    if (userRoles.includes(Role.USER)) return "/my-house"
+    if (userRoles.includes(Role.MODERTOR)) return "/leaderboard"
+    if (userRoles.includes(Role.DEVELOPER)) return "/leaderboard"
+    if (userRoles.includes(Role.USER)) return "/leaderboard"
 
     return "/"
 }

@@ -40,8 +40,7 @@ export function Header() {
     }, [isMenuOpen])
 
     const navLinks = [
-        { label: "Home", href: "/" },
-        { label: "Find Vacancy", href: "/join-apartment" },
+        { label: "leaderboard", href: "/leaderboard" },
         { label: "Account", href: "/account" }
     ]
 
@@ -65,7 +64,7 @@ export function Header() {
         >
             <div className="container mx-auto flex h-16 items-center justify-between px-4">
                 <Link href="/" className="flex items-center gap-2">
-                    <span className="font-bold text-xl text-primary">Malipo Agents</span>
+                    <span className="font-bold text-xl text-primary">Crack Mode</span>
                 </Link>
 
                 {/* Desktop Navigation */}

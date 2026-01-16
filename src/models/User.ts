@@ -29,11 +29,6 @@ const UserSchema = new Schema<IUser>(
 		image: { type: String, default: null },
 		phone: { type: String, trim: true, default: null },
 		roles: { type: [String], enum: Object.values(Role), default: [Role.USER] },
-		joinedApartments: [{ type: Schema.Types.ObjectId, ref: "Apartment" }],
-		ownedApartments: [{ type: Schema.Types.ObjectId, ref: "Apartment" }],
-		rentedHouses: [
-			{ apartment: { type: Schema.Types.ObjectId, ref: "Apartment" }, houseId: { type: Schema.Types.ObjectId, ref: "House" } },
-		],
 	},
 	{ timestamps: true }
 );

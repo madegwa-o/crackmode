@@ -27,6 +27,15 @@ export default function AccountPage() {
 	const [isSettingPassword, setIsSettingPassword] = useState(false)
 	const [isProcessingPush, setIsProcessingPush] = useState(false);
 
+
+	// user name state
+	const [username, setUsername] = useState("")
+	const [isLoadingUsername, setIsLoadingUsername] = useState(true)
+	const [isUpdatingUsername, setIsUpdatingUsername] = useState(false)
+	const [usernameError, setUsernameError] = useState<string | null>(null)
+	const [usernameSuccess, setUsernameSuccess] = useState<string | null>(null)
+
+
 	// Phone number state
 	const [phoneNumber, setPhoneNumber] = useState("")
 	const [isLoadingPhone, setIsLoadingPhone] = useState(true)
@@ -62,6 +71,60 @@ export default function AccountPage() {
 
 		fetchPhoneNumber()
 	}, [status])
+
+
+	useEffect(() => {
+		const fetchUsername = async () => {
+			if (status === "authenticated") {
+				setIsLoadingUsername(true)
+				try {
+					const response = await fetch("/api/user/update-username")
+					if (response.ok) {
+						const data = await response.json()
+						setUsername(data.username || "")
+					}
+				} catch (error) {
+					console.error("Error fetching username:", error)
+				} finally {
+					setIsLoadingUsername(false)
+				}
+			}
+		}
+
+		fetchUsername()
+	}, [status])
+
+	// Add this handler function:
+	const handleUpdateUsername = async (e: React.FormEvent) => {
+		e.preventDefault()
+		setUsernameError(null)
+		setUsernameSuccess(null)
+		setIsUpdatingUsername(true)
+
+		try {
+			const response = await fetch("/api/user/update-username", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({ username }),
+			})
+
+			const data = await response.json()
+
+			if (!response.ok) {
+				setUsernameError(data.error || "Failed to update username")
+			} else {
+				setUsernameSuccess("Username updated successfully!")
+				setUsername(data.username || "")
+				await update()
+			}
+		} catch (error) {
+			console.error("Username update error:", error)
+			setUsernameError("An error occurred. Please try again.")
+		} finally {
+			setIsUpdatingUsername(false)
+		}
+	}
+
 
 	const handleSetPassword = async (e: React.FormEvent) => {
 		e.preventDefault()
@@ -179,6 +242,67 @@ export default function AccountPage() {
 				</TabsList>
 
 				<TabsContent value="profile" className="space-y-6">
+
+					<Card className="gap-1 m-1">
+						<CardHeader>
+							<CardTitle className="flex items-center gap-2">
+								<User className="h-5 w-5" />
+								Username
+							</CardTitle>
+							<CardDescription>Set or change your unique username.</CardDescription>
+						</CardHeader>
+						<CardContent className="space-y-4">
+							{usernameError && (
+								<Alert variant="destructive">
+									<AlertDescription>{usernameError}</AlertDescription>
+								</Alert>
+							)}
+							{usernameSuccess && (
+								<Alert className="border-primary bg-primary/10">
+									<AlertDescription className="text-primary">{usernameSuccess}</AlertDescription>
+								</Alert>
+							)}
+
+							<form onSubmit={handleUpdateUsername} className="space-y-4">
+								<div className="space-y-2">
+									<Label htmlFor="username">Username</Label>
+									<div className="relative">
+										<Input
+											id="username"
+											type="text"
+											placeholder="your_username"
+											value={username}
+											onChange={(e) => setUsername(e.target.value)}
+											disabled={isUpdatingUsername || isLoadingUsername}
+											minLength={3}
+											maxLength={30}
+											pattern="^[a-zA-Z0-9_]+$"
+											title="Username can only contain letters, numbers, and underscores"
+										/>
+										{isLoadingUsername && (
+											<div className="absolute right-3 top-1/2 -translate-y-1/2">
+												<Loader2 className="h-4 w-4 animate-spin text-muted-foreground" />
+											</div>
+										)}
+									</div>
+									<p className="text-sm text-muted-foreground">
+										3-30 characters. Letters, numbers, and underscores only.
+									</p>
+								</div>
+								<Button type="submit" disabled={isUpdatingUsername || isLoadingUsername}>
+									{isUpdatingUsername ? (
+										<>
+											<Loader2 className="mr-2 h-4 w-4 animate-spin" />
+											Updating...
+										</>
+									) : (
+										"Save Username"
+									)}
+								</Button>
+							</form>
+						</CardContent>
+					</Card>
+
 					<Card>
 						<CardHeader>
 							<CardTitle className="flex items-center gap-2">

@@ -5,9 +5,6 @@ import { useEffect } from "react"
 import { useRouter } from "next/navigation"
 import LoadingSkeleton from "@/components/loadingSkeleton"
 import { getDefaultRoute } from "@/lib/navigation"
-import {EditModal} from "@/components/home/EditUserModal";
-import {Edit2} from "lucide-react";
-
 export default function RootPage() {
     const { data: session, status } = useSession()
     const router = useRouter()
