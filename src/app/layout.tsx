@@ -41,36 +41,34 @@ export const viewport: Viewport = {
 };
 
 // -----------------
-// Metadata
+// Metadata (SEO)
 // -----------------
 export const metadata: Metadata = {
-    metadataBase: new URL("https://paysuit.aistartupclub.com"),
+    metadataBase: new URL("https://crackmode.vercel.app"),
 
     title: {
-        default: "Paysuit — M-Pesa Payments for Developers",
-        template: "%s | Paysuit Fintech",
+        default: "CrackMode — LeetCode Leaderboard & Coding Accountability",
+        template: "%s | CrackMode",
     },
 
     description:
-        "Add M-Pesa payments to your applications in minutes. One API, instant settlement, zero bureaucracy.",
+        "CrackMode is a competitive LeetCode leaderboard that tracks real progress, enforces integrity, and builds strong problem-solving habits through live verification.",
 
-    applicationName: "Paysuit",
+    applicationName: "CrackMode",
     generator: "Next.js",
     manifest: "/manifest.json",
 
     keywords: [
-        "Paysuit",
-        "Paysuit Fintech",
-        "M-Pesa API",
-        "Daraja API",
-        "payments API",
-        "mobile money integration",
-        "developer payments",
-        "payments infrastructure",
-        "African fintech",
-        "fintech",
-        "M-Pesa STK Push",
-        "Paysuit SDK"
+        "CrackMode",
+        "LeetCode leaderboard",
+        "DSA practice",
+        "competitive programming",
+        "coding accountability",
+        "interview preparation",
+        "software engineering practice",
+        "algorithm challenges",
+        "daily coding",
+        "LeetCode progress tracker"
     ],
 
     authors: [
@@ -80,8 +78,8 @@ export const metadata: Metadata = {
         },
     ],
 
-    creator: "Paysuit Fintech",
-    publisher: "Paysuit Fintech",
+    creator: "CrackMode",
+    publisher: "CrackMode",
 
     icons: {
         icon: [
@@ -93,45 +91,45 @@ export const metadata: Metadata = {
             {
                 rel: "mask-icon",
                 url: "/icons/android-chrome-192x192.png",
-                color: "#00C853"
+                color: "#111827"
             }
         ],
     },
 
     openGraph: {
         type: "website",
-        url: "https://paysuit.aistartupclub.com",
-        title: "Paysuit — M-Pesa Payments for Developers",
+        url: "https://crackmode.vercel.app",
+        title: "CrackMode — LeetCode Leaderboard & Coding Accountability",
         description:
-            "The fastest way to integrate M-Pesa payments. Clean APIs, instant settlement, built for developers.",
-        siteName: "Paysuit",
+            "Track LeetCode progress, climb the leaderboard, and prove real understanding through live problem-solving.",
+        siteName: "CrackMode",
         images: [
             {
-                url: "https://paysuit.aistartupclub.com/og-image.png",
+                url: "https://crackmode.vercel.app/og-image.png",
                 width: 1200,
                 height: 630,
-                alt: "Paysuit — M-Pesa Payments for Developers"
+                alt: "CrackMode LeetCode Leaderboard"
             }
         ],
     },
 
     twitter: {
         card: "summary_large_image",
-        title: "Paysuit — M-Pesa Payments for Developers",
+        title: "CrackMode — LeetCode Leaderboard",
         description:
-            "Integrate M-Pesa payments in minutes using clean APIs and modern SDKs.",
-        images: ["https://paysuit.aistartupclub.com/og-image.png"],
-        creator: "@paysuit"
+            "A competitive LeetCode leaderboard focused on real skill, consistency, and integrity.",
+        images: ["https://crackmode.vercel.app/og-image.png"],
+        creator: "@crackmode"
     },
 
-    category: "finance",
+    category: "education",
     alternates: {
-        canonical: "https://paysuit.aistartupclub.com/"
+        canonical: "https://crackmode.vercel.app/"
     },
 
     appleWebApp: {
         capable: true,
-        title: "Paysuit",
+        title: "CrackMode",
         statusBarStyle: "black-translucent"
     },
 
@@ -154,7 +152,6 @@ export default function RootLayout({
                 <Suspense fallback={null}>
                     <Header />
                     {children}
-
                     <Analytics />
                 </Suspense>
 
@@ -173,16 +170,16 @@ export default function RootLayout({
                 __html: JSON.stringify({
                     "@context": "https://schema.org",
                     "@type": "SoftwareApplication",
-                    name: "Paysuit",
-                    applicationCategory: "FinanceApplication",
+                    name: "CrackMode",
+                    applicationCategory: "EducationalApplication",
                     operatingSystem: "Web",
                     description:
-                        "Developer-first M-Pesa payments API. Integrate mobile money instantly using secure, modern SDKs.",
-                    url: "https://paysuit.aistartupclub.com",
+                        "A LeetCode leaderboard and accountability platform designed to promote genuine problem-solving through consistency and live verification.",
+                    url: "https://crackmode.vercel.app",
                     creator: {
                         "@type": "Organization",
-                        name: "Paysuit Fintech",
-                        url: "https://paysuit.aistartupclub.com"
+                        name: "CrackMode",
+                        url: "https://crackmode.vercel.app"
                     }
                 }),
             }}
