@@ -1,186 +1,171 @@
-import type {Metadata, Viewport} from "next";
+import type { Metadata, Viewport } from "next";
+import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import {Header} from "@/components/header";
-import { AuthProvider } from "@/components/auth-provider";
-import { NotificationDisplay } from "@/components/notifications/notification-display";
-import AuthErrorHandlerWrapper from "@/components/auth-error-handler-wrapper";
-import InstallPrompt from "@/components/InstallPrompt";
-import MobileBottomNav from "@/components/MobileBottomNav";
-
-import React, {Suspense} from "react"
-import { Geist, Geist_Mono } from "next/font/google"
-import { Analytics } from "@vercel/analytics/next"
-import { ThemeProvider } from "@/components/theme-provider";
 import Script from "next/script";
-import {SidebarNav} from "@/components/sidebar-nav";
-import {ApartmentProvider} from "@/hooks/use-apartment-context";
-import {ApartmentSelector} from "@/components/apartment-selector";
-import {ThemeToggle} from "@/components/theme-toggle";
-import {SidebarTrigger} from "@/components/SidebarTrigger";
 
-const geistSans = Geist({ subsets: ["latin"], variable: "--font-sans" })
-const geistMono = Geist_Mono({ subsets: ["latin"], variable: "--font-mono" })
+import { Header } from "@/components/header";
+import { AuthProvider } from "@/components/auth-provider";
+import { Analytics } from "@vercel/analytics/next";
+import { ThemeProvider } from "@/components/theme-provider";
+import { Suspense } from "react";
+import MobileBottomNav from "@/components/MobileBottomNav";
+import InstallPrompt from "@/components/InstallPrompt";
+import AuthErrorHandlerWrapper from "@/components/auth-error-handler-wrapper";
+import { NotificationDisplay } from "@/components/notifications/notification-display";
 
+// -----------------
+// Font Configuration
+// -----------------
+const geistSans = Geist({
+    variable: "--font-geist-sans",
+    subsets: ["latin"],
+});
+
+const geistMono = Geist_Mono({
+    variable: "--font-geist-mono",
+    subsets: ["latin"],
+});
+
+// -----------------
+// Viewport (Next.js 15+)
+// -----------------
 export const viewport: Viewport = {
     width: "device-width",
     initialScale: 1,
     maximumScale: 1,
     themeColor: [
         { media: "(prefers-color-scheme: light)", color: "#FFFFFF" },
-        { media: "(prefers-color-scheme: dark)", color: "#000000" },
+        { media: "(prefers-color-scheme: dark)", color: "#000000" }
     ],
-    colorScheme: "light dark",
+    colorScheme: "light dark"
 };
 
-
+// -----------------
+// Metadata
+// -----------------
 export const metadata: Metadata = {
-    metadataBase: new URL("https://homes.aistartupclub.com"),
+    metadataBase: new URL("https://paysuit.aistartupclub.com"),
 
     title: {
-        default: "Malipo Agents — Smart Property & Tenant Management",
-        template: "%s | Malipo Agents",
+        default: "Paysuit — M-Pesa Payments for Developers",
+        template: "%s | Paysuit Fintech",
     },
 
     description:
-        "Smart property management platform for landlords and agents. Collect rent, manage tenants, and track payments with ease.",
+        "Add M-Pesa payments to your applications in minutes. One API, instant settlement, zero bureaucracy.",
 
-    applicationName: "Malipo Agents",
+    applicationName: "Paysuit",
     generator: "Next.js",
     manifest: "/manifest.json",
 
     keywords: [
-        "Malipo Agents",
-        "property management Kenya",
-        "tenant management system",
-        "rent collection platform",
-        "landlord software",
-        "real estate management",
-        "M-Pesa rent payments",
-        "property agents Kenya",
+        "Paysuit",
+        "Paysuit Fintech",
+        "M-Pesa API",
+        "Daraja API",
+        "payments API",
+        "mobile money integration",
+        "developer payments",
+        "payments infrastructure",
+        "African fintech",
+        "fintech",
+        "M-Pesa STK Push",
+        "Paysuit SDK"
     ],
 
     authors: [
         {
-            name: "Malipo Agents",
+            name: "Oscar Madegwa",
+            url: "https://madegwa.pages.dev",
         },
     ],
 
-    creator: "Malipo Agents",
-    publisher: "Malipo Agents",
+    creator: "Paysuit Fintech",
+    publisher: "Paysuit Fintech",
 
     icons: {
         icon: [
-            { url: "/icons/favicon-32x32.png", sizes: "32x32", type: "image/png" },
-            { url: "/icons/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+            { url: "/icons/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+            { url: "/icons/favicon-32x32.png", sizes: "32x32", type: "image/png" }
         ],
         apple: "/icons/apple-touch-icon.png",
         other: [
             {
                 rel: "mask-icon",
                 url: "/icons/android-chrome-192x192.png",
-                color: "#00C853",
-            },
+                color: "#00C853"
+            }
         ],
-    },
-
-    robots: {
-        index: true,
-        follow: true,
-        googleBot: {
-            index: true,
-            follow: true,
-            "max-snippet": -1,
-            "max-image-preview": "large",
-            "max-video-preview": -1,
-        },
     },
 
     openGraph: {
         type: "website",
-        url: "https://homes.aistartupclub.com",
-        title: "Malipo Agents — Smart Property Management",
+        url: "https://paysuit.aistartupclub.com",
+        title: "Paysuit — M-Pesa Payments for Developers",
         description:
-            "Manage tenants, collect rent, and track payments from one simple dashboard.",
-        siteName: "Malipo Agents",
+            "The fastest way to integrate M-Pesa payments. Clean APIs, instant settlement, built for developers.",
+        siteName: "Paysuit",
         images: [
             {
-                url: "https://homes.aistartupclub.com/og-image.png",
+                url: "https://paysuit.aistartupclub.com/og-image.png",
                 width: 1200,
                 height: 630,
-                alt: "Malipo Agents — Smart Property Management",
-            },
+                alt: "Paysuit — M-Pesa Payments for Developers"
+            }
         ],
     },
 
     twitter: {
         card: "summary_large_image",
-        title: "Malipo Agents — Smart Property Management",
+        title: "Paysuit — M-Pesa Payments for Developers",
         description:
-            "The easiest way for landlords and agents to manage tenants and rent payments.",
-        images: ["https://homes.aistartupclub.com/og-image.png"],
-        creator: "@malipoagents",
+            "Integrate M-Pesa payments in minutes using clean APIs and modern SDKs.",
+        images: ["https://paysuit.aistartupclub.com/og-image.png"],
+        creator: "@paysuit"
     },
 
-    category: "real estate",
+    category: "finance",
     alternates: {
-        canonical: "https://homes.aistartupclub.com/",
+        canonical: "https://paysuit.aistartupclub.com/"
     },
 
     appleWebApp: {
         capable: true,
-        title: "Malipo Agents",
-        statusBarStyle: "black-translucent",
+        title: "Paysuit",
+        statusBarStyle: "black-translucent"
     },
 
-    formatDetection: {
-        telephone: false,
-    },
+    formatDetection: { telephone: false }
 };
 
-
+// -----------------
+// Root Layout
+// -----------------
 export default function RootLayout({
                                        children,
-                                   }: Readonly<{
-    children: React.ReactNode
-}>) {
+                                   }: {
+    children: React.ReactNode;
+}) {
     return (
-        <html lang="en" suppressHydrationWarning>
-        <body className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background`+ "dotted-bg"}>
+        <html lang="en">
+        <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <AuthProvider>
             <ThemeProvider defaultTheme="system" storageKey="theme-pref">
-                <ApartmentProvider>
-                    <Suspense fallback={null}>
-                        <div className="flex h-screen">
-                            <SidebarNav />
+                <Suspense fallback={null}>
+                    <Header />
+                    {children}
 
-                            <main className="flex-1 overflow-auto dotted-bg">
-                                <header className="sticky top-0 z-50 flex h-14 items-center justify-between border-b bg-background px-4">
-                                    <div className="flex justify-between ">
-                                        <div className="flex items-center gap-2">
-                                            <SidebarTrigger />
-                                        </div>
+                    <Analytics />
+                </Suspense>
 
-                                        <ApartmentSelector />
-                                    </div>
-
-                                    <ThemeToggle />
-                                </header>
-
-                                {children}
-                            </main>
-                        </div>
-
-                        <Analytics />
-                    </Suspense>
-
-                    <NotificationDisplay />
-                    <AuthErrorHandlerWrapper />
-                    <InstallPrompt />
-                    <MobileBottomNav />
-                </ApartmentProvider>
+                <NotificationDisplay />
+                <AuthErrorHandlerWrapper />
+                <InstallPrompt />
+                <MobileBottomNav />
             </ThemeProvider>
         </AuthProvider>
 
+        {/* SEO Structured Data */}
         <Script
             id="structured-data"
             type="application/ld+json"
@@ -188,27 +173,21 @@ export default function RootLayout({
                 __html: JSON.stringify({
                     "@context": "https://schema.org",
                     "@type": "SoftwareApplication",
-                    name: "Malipo Agents",
-                    applicationCategory: "BusinessApplication",
+                    name: "Paysuit",
+                    applicationCategory: "FinanceApplication",
                     operatingSystem: "Web",
                     description:
-                        "Smart property and tenant management platform for landlords and agents.",
-                    url: "https://homes.aistartupclub.com",
+                        "Developer-first M-Pesa payments API. Integrate mobile money instantly using secure, modern SDKs.",
+                    url: "https://paysuit.aistartupclub.com",
                     creator: {
                         "@type": "Organization",
-                        name: "Malipo Agents",
-                        url: "https://homes.aistartupclub.com",
-                    },
-                    offers: {
-                        "@type": "Offer",
-                        price: "0",
-                        priceCurrency: "KES",
-                    },
+                        name: "Paysuit Fintech",
+                        url: "https://paysuit.aistartupclub.com"
+                    }
                 }),
             }}
         />
-
         </body>
         </html>
-    )
+    );
 }
