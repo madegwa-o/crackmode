@@ -175,7 +175,7 @@ export const NAVIGATION: NavItem[] = [
  * Get the default route for a user based on their roles
  */
 export function getDefaultRoute(session: Session | null): string {
-    if (!session?.user) return "/home"
+    if (!session?.user) return "/leaderboard"
 
     const userRoles = session.user.roles ?? []
 
