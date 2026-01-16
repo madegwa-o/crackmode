@@ -25,7 +25,6 @@ interface EditModalProps {
 const ALL_ROLES: Role[] = [
     Role.USER,
     Role.DEVELOPER,
-    Role.LANDLORD,
     Role.ADMIN,
     Role.MODERTOR,
 ]

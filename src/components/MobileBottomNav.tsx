@@ -17,9 +17,9 @@ export default function MobileBottomNav() {
             label: "Home",
         },
         {
-            href: "/join-apartment",
+            href: "/leaderboard",
             icon: Building2,
-            label: "Find Home",
+            label: "Leaderboard",
         },
         {
             href: "/account",

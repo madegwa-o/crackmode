@@ -40,7 +40,7 @@ export function Header() {
     }, [isMenuOpen])
 
     const navLinks = [
-        { label: "leaderboard", href: "/leaderboard" },
+        { label: "Leaderboard", href: "/leaderboard" },
         { label: "Account", href: "/account" }
     ]
 
