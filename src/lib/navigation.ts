@@ -154,8 +154,8 @@ export const NAVIGATION: NavItem[] = [
 
     // 🌍 Public
     {
-        name: "Home",
-        href: "/home",
+        name: "leaderboard",
+        href: "/leaderboard",
         icon: Home,
     },
     {
