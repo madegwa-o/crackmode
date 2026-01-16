@@ -110,53 +110,53 @@ export default function SignInPage() {
     return (
         <div className="min-h-[calc(100vh-64px)] grid lg:grid-cols-2 bg-background dotted-bg">
             {/* Left Side - Hero Section */}
-            <div className="hidden lg:flex flex-col justify-center p-12 xl:p-24 relative overflow-hidden border-r border-border/40 bg-muted/20 ">
-                <div className="relative z-10 max-w-lg space-y-12 bg-background p-10">
-                    <div className="space-y-6">
-                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-medium">
-                            <Zap className="w-3.5 h-3.5" />
-                            <span>V2 Now Live</span>
-                        </div>
-                        <h2 className="text-5xl font-extrabold tracking-tight leading-[1.1]">
-                            Manage with <span className="text-primary italic">Intelligence</span>.
-                        </h2>
-                        <p className="text-xl text-muted-foreground leading-relaxed max-w-md">
-                            The modern standard for apartment management in Kenya. Simple, fast, and automated.
-                        </p>
-                    </div>
+            {/*<div className="hidden lg:flex flex-col justify-center p-12 xl:p-24 relative overflow-hidden border-r border-border/40 bg-muted/20 ">*/}
+            {/*    <div className="relative z-10 max-w-lg space-y-12 bg-background p-10">*/}
+            {/*        <div className="space-y-6">*/}
+            {/*            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-medium">*/}
+            {/*                <Zap className="w-3.5 h-3.5" />*/}
+            {/*                <span>V2 Now Live</span>*/}
+            {/*            </div>*/}
+            {/*            <h2 className="text-5xl font-extrabold tracking-tight leading-[1.1]">*/}
+            {/*                Manage with <span className="text-primary italic">Intelligence</span>.*/}
+            {/*            </h2>*/}
+            {/*            <p className="text-xl text-muted-foreground leading-relaxed max-w-md">*/}
+            {/*                The modern standard for apartment management in Kenya. Simple, fast, and automated.*/}
+            {/*            </p>*/}
+            {/*        </div>*/}
 
-                    <div className="grid gap-4">
-                        {features.map((feature, i) => (
-                            <div
-                                key={i}
-                                className="flex gap-4 items-center p-4 rounded-2xl bg-card border border-border/50 shadow-sm transition-all hover:border-primary/30 group"
-                            >
-                                <div className="p-2.5 rounded-xl bg-primary/5 text-primary transition-colors group-hover:bg-primary/10">
-                                    <feature.icon className="w-5 h-5" />
-                                </div>
-                                <div>
-                                    <h3 className="font-semibold">{feature.title}</h3>
-                                    <p className="text-sm text-muted-foreground">{feature.desc}</p>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </div>
+            {/*        <div className="grid gap-4">*/}
+            {/*            {features.map((feature, i) => (*/}
+            {/*                <div*/}
+            {/*                    key={i}*/}
+            {/*                    className="flex gap-4 items-center p-4 rounded-2xl bg-card border border-border/50 shadow-sm transition-all hover:border-primary/30 group"*/}
+            {/*                >*/}
+            {/*                    <div className="p-2.5 rounded-xl bg-primary/5 text-primary transition-colors group-hover:bg-primary/10">*/}
+            {/*                        <feature.icon className="w-5 h-5" />*/}
+            {/*                    </div>*/}
+            {/*                    <div>*/}
+            {/*                        <h3 className="font-semibold">{feature.title}</h3>*/}
+            {/*                        <p className="text-sm text-muted-foreground">{feature.desc}</p>*/}
+            {/*                    </div>*/}
+            {/*                </div>*/}
+            {/*            ))}*/}
+            {/*        </div>*/}
+            {/*    </div>*/}
+            {/*</div>*/}
 
             {/* Right Side - Form */}
             <div className="flex items-center justify-center p-6 sm:p-12">
                 <div className="w-full max-w-[420px] space-y-8">
                     {/* Logo */}
                     <div className="flex justify-center lg:justify-start">
-                        <Image
-                            src="/logo.png"
-                            alt="Malipo Agents Logo"
-                            width={60}
-                            height={60}
-                            className="object-contain"
-                            priority
-                        />
+                        {/*<Image*/}
+                        {/*    src="/logo.png"*/}
+                        {/*    alt="Malipo Agents Logo"*/}
+                        {/*    width={60}*/}
+                        {/*    height={60}*/}
+                        {/*    className="object-contain"*/}
+                        {/*    priority*/}
+                        {/*/>*/}
                         <div className="space-y-2 text-center lg:text-left">
                             <h1 className="text-3xl font-bold tracking-tight">Welcome back</h1>
                             <p className="text-muted-foreground">Enter your credentials to access your dashboard</p>
@@ -259,7 +259,7 @@ export default function SignInPage() {
 
 
                     <p className="text-center text-sm text-muted-foreground">
-                        New to Malipo Agents?{" "}
+                        New to crack mode?{" "}
                         <button
                             onClick={handleGoogleSignIn}
                             disabled={isLoading}
