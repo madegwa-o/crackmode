@@ -41,10 +41,7 @@ export default function InstallPrompt() {
         };
 
         window.addEventListener("beforeinstallprompt", handler);
-
-        return () => {
-            window.removeEventListener("beforeinstallprompt", handler);
-        };
+        return () => window.removeEventListener("beforeinstallprompt", handler);
     }, []);
 
     useEffect(() => {
@@ -52,9 +49,7 @@ export default function InstallPrompt() {
             const hasAsked = sessionStorage.getItem("notification-prompt-shown");
 
             if (!hasAsked && Notification.permission === "default") {
-                setTimeout(() => {
-                    setShowNotificationPrompt(true);
-                }, 2000);
+                setTimeout(() => setShowNotificationPrompt(true), 2000);
             }
         }
     }, [isStandalone, isSupported, isSubscribed]);
@@ -103,36 +98,48 @@ export default function InstallPrompt() {
             <div className="fixed top-20 left-4 right-4 md:left-auto md:right-6 md:w-80 z-[60] animate-in slide-in-from-top-4 fade-in duration-500">
                 <div className="relative overflow-hidden rounded-2xl border border-primary/20 bg-background/95 backdrop-blur-xl p-5 shadow-2xl shadow-primary/10">
                     <div className="absolute top-0 right-0 p-2">
-                        <button onClick={handleDismissInstall} className="text-muted-foreground hover:text-foreground transition-colors">
+                        <button
+                            onClick={handleDismissInstall}
+                            className="text-muted-foreground hover:text-foreground transition-colors"
+                        >
                             <X className="h-4 w-4" />
                         </button>
                     </div>
+
                     <div className="flex flex-col gap-4">
                         <div className="flex items-center gap-3">
                             <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary">
-
-
-                            <Image
-                                src="/icons/android-chrome-192x192.png"
-                                alt="Malipo Agents"
-                                width={48}
-                                height={48}
-                                className="w-12 h-12 rounded-lg"
-                            />
-
+                                <Image
+                                    src="/icons/android-chrome-192x192.png"
+                                    alt="CrackMode"
+                                    width={48}
+                                    height={48}
+                                    className="w-12 h-12 rounded-lg"
+                                />
                             </div>
                             <div>
-                                <h3 className="font-bold text-foreground">Get the App</h3>
-                                <p className="text-xs text-muted-foreground">Install Malipo for a better mobile experience.</p>
+                                <h3 className="font-bold text-foreground">Install CrackMode</h3>
+                                <p className="text-xs text-muted-foreground">
+                                    Track your LeetCode progress faster and stay accountable.
+                                </p>
                             </div>
                         </div>
                     </div>
 
                     <div className="flex gap-2">
-                        <Button size="sm" className="flex-1 font-bold shadow-lg shadow-primary/20"  onClick={handleInstallClick} >
+                        <Button
+                            size="sm"
+                            className="flex-1 font-bold shadow-lg shadow-primary/20"
+                            onClick={handleInstallClick}
+                        >
                             Install App
                         </Button>
-                        <Button size="sm" variant="ghost" className="text-xs font-semibold" onClick={handleDismissInstall} >
+                        <Button
+                            size="sm"
+                            variant="ghost"
+                            className="text-xs font-semibold"
+                            onClick={handleDismissInstall}
+                        >
                             Maybe later
                         </Button>
                     </div>
@@ -151,8 +158,12 @@ export default function InstallPrompt() {
                                 <Bell className="h-6 w-6 text-accent" />
                             </div>
                             <div>
-                                <h3 className="font-semibold text-card-foreground">Enable Notifications</h3>
-                                <p className="text-sm text-muted-foreground">Get alerts when rent is due.</p>
+                                <h3 className="font-semibold text-card-foreground">
+                                    Enable Notifications
+                                </h3>
+                                <p className="text-sm text-muted-foreground">
+                                    Get alerts for leaderboard changes and verification sessions.
+                                </p>
                             </div>
                         </div>
                         <button

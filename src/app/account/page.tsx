@@ -276,7 +276,6 @@ export default function AccountPage() {
 											disabled={isUpdatingUsername || isLoadingUsername}
 											minLength={3}
 											maxLength={30}
-											pattern="^[a-zA-Z0-9_]+$"
 											title="Username can only contain letters, numbers, and underscores"
 										/>
 										{isLoadingUsername && (
