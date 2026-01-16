@@ -91,24 +91,24 @@ export default function LeaderboardPage() {
     };
 
     const getRankIcon = (index: number) => {
-        if (index === 0) return <Trophy className="w-6 h-6 text-yellow-500" />;
+        if (index === 0) return <Trophy className="w-6 h-6 text-chart-4" />;
         if (index === 1) return <Award className="w-6 h-6 text-gray-400" />;
-        if (index === 2) return <Award className="w-6 h-6 text-amber-600" />;
-        return <span className="text-lg font-semibold text-gray-500">#{index + 1}</span>;
+        if (index === 2) return <Award className="w-6 h-6 text-chart-5" />;
+        return <span className="text-lg font-semibold text-muted-foreground">#{index + 1}</span>;
     };
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 p-8">
+        <div className="min-h-screen bg-gradient-to-br from-purple-900 via-purple-700 to-purple-900 p-8 dotted-bg">
             <div className="max-w-5xl mx-auto">
                 <div className="text-center mb-12">
                     <h1 className="text-5xl font-bold text-white mb-4 flex items-center justify-center gap-3">
-                        <TrendingUp className="w-12 h-12 text-purple-400" />
+                        <TrendingUp className="w-12 h-12 text-purple-300" />
                         LeetCode Leaderboard
                     </h1>
-                    <p className="text-purple-200">Track and compare your coding progress</p>
+                    <p className="text-purple-100">Track and compare your coding progress</p>
                 </div>
 
-                <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 mb-8 shadow-2xl border border-white/20">
+                <div className="bg-card/10 backdrop-blur-lg rounded-2xl p-6 mb-8 shadow-2xl border border-border">
                     <div className="flex justify-between items-center">
                         <p className="text-white text-lg">
                             {users.length > 0 ? `Tracking ${users.length} user${users.length !== 1 ? 's' : ''}` : 'No users found'}
@@ -122,17 +122,17 @@ export default function LeaderboardPage() {
                             {refreshing ? 'Refreshing...' : 'Refresh'}
                         </button>
                     </div>
-                    {error && <p className="mt-3 text-red-300 text-sm">{error}</p>}
+                    {error && <p className="mt-3 text-destructive text-sm">{error}</p>}
                 </div>
 
                 <div className="space-y-4">
                     {loading && users.length === 0 ? (
-                        <div className="text-center py-16 text-purple-200">
-                            <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-purple-400 mx-auto mb-4"></div>
+                        <div className="text-center py-16 text-purple-100">
+                            <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-purple-300 mx-auto mb-4"></div>
                             <p className="text-xl">Loading leaderboard...</p>
                         </div>
                     ) : users.length === 0 ? (
-                        <div className="text-center py-16 text-purple-200">
+                        <div className="text-center py-16 text-purple-100">
                             <Trophy className="w-16 h-16 mx-auto mb-4 opacity-50" />
                             <p className="text-xl">No users with LeetCode usernames found</p>
                             <p className="text-sm mt-2 opacity-75">Users need to set their LeetCode username in their profile</p>
@@ -141,7 +141,7 @@ export default function LeaderboardPage() {
                         users.map((user, index) => (
                             <div
                                 key={user.username}
-                                className="bg-white/10 backdrop-blur-lg rounded-xl p-6 shadow-xl border border-white/20 hover:bg-white/15 transition-all"
+                                className="bg-card/10 backdrop-blur-lg rounded-xl p-6 shadow-xl border border-border hover:bg-card/15 transition-all"
                             >
                                 <div className="flex items-center justify-between">
                                     <div className="flex items-center gap-4 flex-1">
@@ -156,16 +156,16 @@ export default function LeaderboardPage() {
 
                                     <div className="flex gap-6 items-center">
                                         <div className="text-center">
-                                            <p className="text-green-400 text-2xl font-bold">{user.easy}</p>
-                                            <p className="text-green-300 text-xs">Easy</p>
+                                            <p className="text-chart-2 text-2xl font-bold">{user.easy}</p>
+                                            <p className="text-chart-2/80 text-xs">Easy</p>
                                         </div>
                                         <div className="text-center">
-                                            <p className="text-yellow-400 text-2xl font-bold">{user.medium}</p>
-                                            <p className="text-yellow-300 text-xs">Medium</p>
+                                            <p className="text-chart-4 text-2xl font-bold">{user.medium}</p>
+                                            <p className="text-chart-4/80 text-xs">Medium</p>
                                         </div>
                                         <div className="text-center">
-                                            <p className="text-red-400 text-2xl font-bold">{user.hard}</p>
-                                            <p className="text-red-300 text-xs">Hard</p>
+                                            <p className="text-chart-5 text-2xl font-bold">{user.hard}</p>
+                                            <p className="text-chart-5/80 text-xs">Hard</p>
                                         </div>
                                     </div>
                                 </div>
