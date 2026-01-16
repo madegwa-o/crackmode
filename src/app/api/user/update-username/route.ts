@@ -77,14 +77,14 @@ export async function POST(req: NextRequest) {
                 { status: 400 }
             );
         }
-
-        // Check if username contains only valid characters
-        if (!/^[a-zA-Z0-9_]+$/.test(username)) {
-            return NextResponse.json(
-                { error: "Username can only contain letters, numbers, and underscores" },
-                { status: 400 }
-            );
-        }
+        //
+        // // Check if username contains only valid characters
+        // if (!/^[a-zA-Z0-9_]+$/.test(username)) {
+        //     return NextResponse.json(
+        //         { error: "Username can only contain letters, numbers, and underscores" },
+        //         { status: 400 }
+        //     );
+        // }
 
         await connectToDatabase();
 

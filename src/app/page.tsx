@@ -2,7 +2,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Search, Trophy, TrendingUp, Award } from 'lucide-react';
+import { Search, Trophy, TrendingUp, Award, RefreshCw } from 'lucide-react';
 
 interface LeetCodeUser {
     username: string;
@@ -14,27 +14,46 @@ interface LeetCodeUser {
 
 export default function LeaderboardPage() {
     const [users, setUsers] = useState<LeetCodeUser[]>([]);
-    const [username, setUsername] = useState('');
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
+    const [refreshing, setRefreshing] = useState(false);
 
     useEffect(() => {
         loadUsers();
     }, []);
 
     const loadUsers = async () => {
+        setLoading(true);
+        setError('');
+
         try {
-            const stored = localStorage.getItem('leetcode_users');
-            if (stored) {
-                const usernames: string[] = JSON.parse(stored);
-                const userData = await Promise.all(
-                    usernames.map(name => fetchUserData(name))
-                );
-                const validUsers = userData.filter((user): user is LeetCodeUser => user !== null);
-                setUsers(validUsers.sort((a, b) => b.total - a.total));
+            // Fetch all usernames from database
+            const usernamesResponse = await fetch('/api/users/usernames');
+
+            if (!usernamesResponse.ok) {
+                throw new Error('Failed to fetch usernames from database');
             }
+
+            const { usernames } = await usernamesResponse.json();
+
+            if (!usernames || usernames.length === 0) {
+                setUsers([]);
+                setLoading(false);
+                return;
+            }
+
+            // Fetch LeetCode data for each username
+            const userData = await Promise.all(
+                usernames.map((name: string) => fetchUserData(name))
+            );
+
+            const validUsers = userData.filter((user): user is LeetCodeUser => user !== null);
+            setUsers(validUsers.sort((a, b) => b.total - a.total));
         } catch (err) {
             console.error('Error loading users:', err);
+            setError('Failed to load leaderboard data');
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -65,51 +84,10 @@ export default function LeaderboardPage() {
         }
     };
 
-    const addUser = async (e: React.MouseEvent<HTMLButtonElement> | React.KeyboardEvent<HTMLInputElement>) => {
-        e.preventDefault();
-        if (!username.trim()) return;
-
-        setLoading(true);
-        setError('');
-
-        try {
-            const userData = await fetchUserData(username.trim());
-
-            if (!userData) {
-                setError('User not found. Please check the username.');
-                setLoading(false);
-                return;
-            }
-
-            const stored = localStorage.getItem('leetcode_users');
-            const existing: string[] = stored ? JSON.parse(stored) : [];
-
-            if (existing.includes(userData.username)) {
-                setError('User already in leaderboard.');
-                setLoading(false);
-                return;
-            }
-
-            const updated = [...existing, userData.username];
-            localStorage.setItem('leetcode_users', JSON.stringify(updated));
-
-            setUsers([...users, userData].sort((a, b) => b.total - a.total));
-            setUsername('');
-        } catch (err) {
-            setError('Failed to add user. Please try again.');
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    const removeUser = (usernameToRemove: string) => {
-        const stored = localStorage.getItem('leetcode_users');
-        if (stored) {
-            const existing: string[] = JSON.parse(stored);
-            const updated = existing.filter(u => u !== usernameToRemove);
-            localStorage.setItem('leetcode_users', JSON.stringify(updated));
-            setUsers(users.filter(u => u.username !== usernameToRemove));
-        }
+    const refreshLeaderboard = async () => {
+        setRefreshing(true);
+        await loadUsers();
+        setRefreshing(false);
     };
 
     const getRankIcon = (index: number) => {
@@ -131,35 +109,33 @@ export default function LeaderboardPage() {
                 </div>
 
                 <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 mb-8 shadow-2xl border border-white/20">
-                    <div className="flex gap-3">
-                        <div className="flex-1 relative">
-                            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
-                            <input
-                                type="text"
-                                value={username}
-                                onChange={(e) => setUsername(e.target.value)}
-                                onKeyDown={(e) => e.key === 'Enter' && addUser(e)}
-                                placeholder="Enter LeetCode username"
-                                className="w-full pl-11 pr-4 py-3 bg-white/90 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 text-gray-900"
-                                disabled={loading}
-                            />
-                        </div>
+                    <div className="flex justify-between items-center">
+                        <p className="text-white text-lg">
+                            {users.length > 0 ? `Tracking ${users.length} user${users.length !== 1 ? 's' : ''}` : 'No users found'}
+                        </p>
                         <button
-                            onClick={addUser}
-                            disabled={loading}
-                            className="px-6 py-3 bg-purple-600 hover:bg-purple-700 disabled:bg-purple-400 text-white font-semibold rounded-lg transition-colors"
+                            onClick={refreshLeaderboard}
+                            disabled={refreshing || loading}
+                            className="px-6 py-3 bg-purple-600 hover:bg-purple-700 disabled:bg-purple-400 text-white font-semibold rounded-lg transition-colors flex items-center gap-2"
                         >
-                            {loading ? 'Adding...' : 'Add User'}
+                            <RefreshCw className={`w-5 h-5 ${refreshing ? 'animate-spin' : ''}`} />
+                            {refreshing ? 'Refreshing...' : 'Refresh'}
                         </button>
                     </div>
                     {error && <p className="mt-3 text-red-300 text-sm">{error}</p>}
                 </div>
 
                 <div className="space-y-4">
-                    {users.length === 0 ? (
+                    {loading && users.length === 0 ? (
+                        <div className="text-center py-16 text-purple-200">
+                            <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-purple-400 mx-auto mb-4"></div>
+                            <p className="text-xl">Loading leaderboard...</p>
+                        </div>
+                    ) : users.length === 0 ? (
                         <div className="text-center py-16 text-purple-200">
                             <Trophy className="w-16 h-16 mx-auto mb-4 opacity-50" />
-                            <p className="text-xl">No users yet. Add someone to get started!</p>
+                            <p className="text-xl">No users with LeetCode usernames found</p>
+                            <p className="text-sm mt-2 opacity-75">Users need to set their LeetCode username in their profile</p>
                         </div>
                     ) : (
                         users.map((user, index) => (
@@ -191,12 +167,6 @@ export default function LeaderboardPage() {
                                             <p className="text-red-400 text-2xl font-bold">{user.hard}</p>
                                             <p className="text-red-300 text-xs">Hard</p>
                                         </div>
-                                        <button
-                                            onClick={() => removeUser(user.username)}
-                                            className="ml-4 px-4 py-2 bg-red-500/20 hover:bg-red-500/30 text-red-300 rounded-lg transition-colors text-sm"
-                                        >
-                                            Remove
-                                        </button>
                                     </div>
                                 </div>
                             </div>
