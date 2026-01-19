@@ -7,7 +7,8 @@ const PUBLIC_ROUTES = [
     "/",
     "/signin",
     "/home",
-    "/api/payments/direct/callback",
+    "/api/leetcode",
+    "/api/users/usernames",
     // Add any other public routes here
 ];
 
