@@ -44,7 +44,7 @@ export const viewport: Viewport = {
 // Metadata (SEO)
 // -----------------
 export const metadata: Metadata = {
-    metadataBase: new URL("https://crackmode.vercel.app"),
+    metadataBase: new URL("https://crackmode.aistartupclub.com/"),
 
     title: {
         default: "CrackMode — LeetCode Leaderboard & Coding Accountability",
@@ -98,7 +98,7 @@ export const metadata: Metadata = {
 
     openGraph: {
         type: "website",
-        url: "https://crackmode.vercel.app",
+        url: "https://crackmode.aistartupclub.com/",
         title: "CrackMode — LeetCode Leaderboard & Coding Accountability",
         description:
             "Track LeetCode progress, climb the leaderboard, and prove real understanding through live problem-solving.",
@@ -124,7 +124,7 @@ export const metadata: Metadata = {
 
     category: "education",
     alternates: {
-        canonical: "https://crackmode.vercel.app/"
+        canonical: "https://crackmode.aistartupclub.com/"
     },
 
     appleWebApp: {
@@ -175,11 +175,11 @@ export default function RootLayout({
                     operatingSystem: "Web",
                     description:
                         "A LeetCode leaderboard and accountability platform designed to promote genuine problem-solving through consistency and live verification.",
-                    url: "https://crackmode.vercel.app",
+                    url: "https://crackmode.aistartupclub.com/",
                     creator: {
                         "@type": "Organization",
                         name: "CrackMode",
-                        url: "https://crackmode.vercel.app"
+                        url: "https://crackmode.aistartupclub.com/"
                     }
                 }),
             }}
