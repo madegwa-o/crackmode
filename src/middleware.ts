@@ -6,8 +6,9 @@ import { NextResponse } from "next/server"
 const PUBLIC_ROUTES = [
     "/",
     "/signin",
-    "/home",
+    "/leaderboard",
     "/api/leetcode",
+    "/api/leetcode/submission-calender",
     "/api/users/usernames",
     // Add any other public routes here
 ];
