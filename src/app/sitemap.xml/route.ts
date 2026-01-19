@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server"
 
-const BASE_URL = "https://homes.aistartupclub.com"
+const BASE_URL = "https://crackmode.aistartupclub.com"
 
 type SitemapRoute = {
     path: string
