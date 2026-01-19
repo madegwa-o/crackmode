@@ -106,11 +106,12 @@ export default function LeaderboardPage() {
 
     const getHeatmapColor = (count: number) => {
         if (count === 0) return 'bg-gray-200 dark:bg-gray-800';
-        if (count <= 2) return 'bg-purple-300 dark:bg-purple-700';
-        if (count <= 5) return 'bg-purple-400 dark:bg-purple-600';
-        if (count <= 10) return 'bg-purple-500 dark:bg-purple-500';
-        return 'bg-purple-600 dark:bg-purple-400';
+        if (count <= 2) return 'bg-green-200 dark:bg-green-900';
+        if (count <= 5) return 'bg-green-400 dark:bg-green-700';
+        if (count <= 10) return 'bg-green-500 dark:bg-green-600';
+        return 'bg-green-700 dark:bg-green-500';
     };
+
 
     const renderCalendarHeatmap = (calendar: CalendarDay[]) => {
         // Get last 365 days
