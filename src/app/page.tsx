@@ -101,7 +101,7 @@ export default function LeaderboardPage() {
         <div className="min-h-screen bg-gradient-to-br from-purple-900 via-purple-700 to-purple-900 p-8 dotted-bg">
             <div className="max-w-5xl mx-auto">
                 <div className="text-center mb-12">
-                    <h1 className="text-5xl font-bold text-white mb-4 flex items-center justify-center gap-3">
+                    <h1 className="text-5xl font-bold  mb-4 flex items-center justify-center gap-3">
                         <TrendingUp className="w-12 h-12 text-purple-300" />
                         LeetCode Leaderboard
                     </h1>
@@ -110,13 +110,13 @@ export default function LeaderboardPage() {
 
                 <div className="bg-card/10 backdrop-blur-lg rounded-2xl p-6 mb-8 shadow-2xl border border-border">
                     <div className="flex justify-between items-center">
-                        <p className="text-white text-lg">
+                        <p className=" text-lg">
                             {users.length > 0 ? `Tracking ${users.length} user${users.length !== 1 ? 's' : ''}` : 'No users found'}
                         </p>
                         <button
                             onClick={refreshLeaderboard}
                             disabled={refreshing || loading}
-                            className="px-6 py-3 bg-purple-600 hover:bg-purple-700 disabled:bg-purple-400 text-white font-semibold rounded-lg transition-colors flex items-center gap-2"
+                            className="px-6 py-3 bg-purple-600 hover:bg-purple-700 disabled:bg-purple-400  font-semibold rounded-lg transition-colors flex items-center gap-2"
                         >
                             <RefreshCw className={`w-5 h-5 ${refreshing ? 'animate-spin' : ''}`} />
                             {refreshing ? 'Refreshing...' : 'Refresh'}
@@ -149,7 +149,7 @@ export default function LeaderboardPage() {
                                             {getRankIcon(index)}
                                         </div>
                                         <div>
-                                            <h3 className="text-2xl font-bold text-white">{user.username}</h3>
+                                            <h3 className="text-2xl font-bold ">{user.username}</h3>
                                             <p className="text-purple-200 text-sm">Total Solved: {user.total}</p>
                                         </div>
                                     </div>
